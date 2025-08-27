@@ -149,15 +149,12 @@
             "typeValidation": "strict",
             "version": 2
           },
-          "conditions": [
+          "number": [
             {
               "id": "9d90c1ce-590e-40a5-ae8c-d92326032975",
-              "leftValue": "={{ $json.status }}",
-              "rightValue": "completed",
-              "operator": {
-                "type": "string",
-                "operation": "equals"
-              }
+              "value1": "={{ new Date($json.pubDate).getTime() }}",
+              "operation": "larger",
+              "value2": "={{ new Date().getTime() - 36*60*60*1000 }}"
             }
           ],
           "combinator": "and"
@@ -268,6 +265,12 @@
     },
     {
       "parameters": {
+        "prompt": {
+          "messages": [
+            { "role": "system", "content": "You are a helpful AI assistant specialized in answering questions about Pydantic AI documentation. Use the retrieved information to provide accurate and helpful responses." },
+            { "role": "user", "content": "{{ $json.chatInput }}" }
+          ]
+        },
         "options": {}
       },
       "id": "105b2092-36d3-45d6-9686-673f886933f8",
@@ -337,6 +340,12 @@
     },
     {
       "parameters": {
+        "prompt": {
+          "messages": [
+            { "role": "system", "content": "You are a helpful AI assistant that provides accurate information from the Pydantic AI documentation." },
+            { "role": "user", "content": "{{ $json.input }}" }
+          ]
+        },
         "options": {}
       },
       "id": "eb940dd5-56e6-4e04-9534-2f910b5d6c8e",
